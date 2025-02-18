@@ -1,0 +1,13 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="close.emit()">
+    <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Evita cerrar al hacer clic dentro -->
+      <button class="close-button" (click)="close.emit()">✖</button>
+      <img [src]="item.imagen" [alt]="item.nombre" class="modal-image">
+      <h2 class="modal-title">{{ item.nombre }}</h2>
+      <p class="modal-price">{{ item.precio | currency:'EUR' }}</p>
+      <p *ngIf="item.alergenos.length > 0" class="modal-allergens">
+        <strong>Alérgenos:</strong> {{ item.alergenos.join(', ') }}
+      </p>
+      <button class="cart-button" (click)="addToCart()">Añadir al carrito</button>
+    </div>
+  </div>
+  

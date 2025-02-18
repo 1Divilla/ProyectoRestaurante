@@ -1,0 +1,37 @@
+<div class="menu-container">
+    <h2 class="title">Menú</h2>
+
+    <!-- 🔥 Menú de navegación para filtrar categorías -->
+    <div class="menu-nav">
+        <button 
+            *ngFor="let cat of categorias" 
+            class="filter-button" 
+            [class.active]="cat === categoriaSeleccionada"
+            (click)="filtrarMenu(cat)">
+            {{ cat }}
+        </button>
+    </div>
+
+    <!-- 🔥 Mostrar solo la categoría seleccionada -->
+    <div *ngFor="let categoria of menuFiltrado" class="category">
+        <h3 class="category-title">{{ categoria.categoria }}</h3>
+
+        <div class="items-container">
+            <button *ngFor="let item of categoria.items" class="item-card" (click)="openModal(item)">
+                <img [src]="item.imagen" [alt]="item.nombre" class="item-image">
+                <div class="item-info">
+                    <h4 class="item-name">{{ item.nombre }}</h4>
+                    <p class="item-price">{{ item.precio | currency:'EUR' }}</p>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<app-modal-items 
+    *ngIf="isModalOpen" 
+    [item]="selectedItem" 
+    [isOpen]="isModalOpen"
+    (close)="closeModal()">
+</app-modal-items>

@@ -9,5 +9,29 @@
 <body>
   
   <app-root></app-root>
+
+  <!-- 🔥 Botón flotante para subir arriba -->
+  <button id="scrollTopBtn" class="scroll-top-btn" onclick="scrollToTop()">⬆️</button>
+
+  <script>
+    // Mostrar / ocultar el botón según el scroll
+    window.onscroll = function() { toggleScrollButton(); };
+
+    function toggleScrollButton() {
+      const btn = document.getElementById("scrollTopBtn");
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btn.style.opacity = "1";
+        btn.style.visibility = "visible";
+      } else {
+        btn.style.opacity = "0";
+        btn.style.visibility = "hidden";
+      }
+    }
+
+    // Scroll suave al hacer clic en el botón
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>

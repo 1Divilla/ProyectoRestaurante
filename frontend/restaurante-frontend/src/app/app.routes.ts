@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { CartaComponent } from './menu/pages/carta/carta.component'; 
+
 
 export const appRoutes: Routes = [
   {
@@ -9,6 +11,12 @@ export const appRoutes: Routes = [
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) // ✅ Carga el AdminModule correctamente
   },
+  {
+    path: 'menu',
+    component: CartaComponent,
+    loadChildren: () => import('./menu/menu.module').then(m => m.MenuModule)
+  },
+  { path: '', redirectTo: '/carta', pathMatch: 'full' },
   {
     path: 'auth', // ✅ Nueva ruta para autenticación
     loadChildren: () => import('./register-login/register-login.module').then(m => m.RegisterLoginModule)
