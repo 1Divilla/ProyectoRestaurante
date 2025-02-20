@@ -5,11 +5,29 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
-
+html, body {
+    height: 100%; /* Asegura que tanto html como body ocupen el 100% de la altura */
+    margin: 0; /* Elimina el margen predeterminado */
+}
+  
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+  
+app-root {
+    flex: 1;
+}
+  
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+app-root {
+    height: 100%;
 }
 
 header {

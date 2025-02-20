@@ -23,7 +23,9 @@
                       <a class="nav-link" title="Hover text" href=""><ion-icon name="call-outline"></ion-icon><span>Reservar</span></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" title="Hover text" href=""><ion-icon name="cart-outline"></ion-icon></ion-icon></a>
+                      <a class="nav-link" id="openSidenavButton" title="Hover text" onclick="window.shoppingCartComponent.ejecutarComando()">
+                        <ion-icon name="cart-outline"></ion-icon></ion-icon>
+                      </a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" title="Hover text" href=""><ion-icon name="person-circle-sharp"></ion-icon></a>
@@ -75,7 +77,14 @@
   </div>
 </footer>
 
-
+<!-- Sidenav -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(() => {
+      window.angularComponent = document.querySelector('app-root')?.__ngContext__?.[30];
+    }, 1000);
+  });
+</script>
 <!-- Scrool to Top -->
 <script>
   function scrollToTop() {
