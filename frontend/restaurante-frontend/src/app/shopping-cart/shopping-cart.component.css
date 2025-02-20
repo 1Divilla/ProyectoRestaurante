@@ -1,0 +1,88 @@
+.example-container {
+  height: 100%;
+  display: flex;
+}
+
+mat-sidenav {
+  width: 270px;
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+mat-sidenav-content {
+  flex: 1;
+  padding: 16px;
+}
+
+button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  padding: 0;
+  cursor: pointer;
+}
+
+mat-sidenav button {
+  margin-bottom: 20px;
+  transition: color 0.3s ease;
+}
+
+mat-sidenav button:hover {
+  color: #e74c3c;
+}
+
+mat-sidenav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+mat-sidenav li {
+  padding: 12px 0;
+  border-bottom: 1px solid #34495e;
+}
+
+mat-sidenav li span {
+  font-size: 16px;
+  color: #ecf0f1;
+  transition: color 0.3s ease;
+}
+
+mat-sidenav li:hover {
+  background-color: #34495e;
+}
+
+mat-sidenav li:hover span {
+  color: #ecf0f1;
+}
+
+.sidebar-total {
+  margin-top: auto;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 0;
+  text-align: center;
+  background-color: #34495e;
+  border-top: 1px solid #2c3e50;
+}
+
+.sidebar-total span {
+  color: #e74c3c;
+}
+
+mat-sidenav ul {
+  padding-right: 15px;
+  max-height: calc(100vh - 160px);
+}
+
+mat-sidenav li span {
+  padding-left: 10px;
+}
