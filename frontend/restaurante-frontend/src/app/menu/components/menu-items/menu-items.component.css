@@ -98,8 +98,8 @@
 /* 🔥 Grid responsivo */
 .items-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 25px;
+    grid-template-columns: repeat(4, minmax(280px, 1fr)); 
+    gap: 10px;
     justify-items: center;
 }
 

@@ -18,9 +18,9 @@
 
         <div class="items-container">
             <button *ngFor="let item of categoria.items" class="item-card" (click)="openModal(item)">
-                <img [src]="item.imagen" [alt]="item.nombre" class="item-image">
+                <img [src]="item.imagen" [alt]="item.nickname" class="item-image">
                 <div class="item-info">
-                    <h4 class="item-name">{{ item.nombre }}</h4>
+                    <h4 class="item-name">{{ item.nickname }}</h4>
                     <p class="item-price">{{ item.precio | currency:'EUR' }}</p>
                 </div>
             </button>
