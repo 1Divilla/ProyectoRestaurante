@@ -1,11 +1,20 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-img',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './img.component.html',
-  styleUrl: './img.component.css'
+  styleUrls: ['./img.component.css']
 })
 export class ImgComponent {
+  currentIndex = 0;
 
+  prevSlide() {
+    this.currentIndex = (this.currentIndex > 0) ? this.currentIndex - 1 : 3; 
+  }
+
+  nextSlide() {
+    this.currentIndex = (this.currentIndex < 3) ? this.currentIndex + 1 : 0;
+  }
 }

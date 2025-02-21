@@ -1,0 +1,84 @@
+/* Contenedor principal centrado en pantalla */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffefd5;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Contenedor de la página */
+  .reservation-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 40px;
+    padding: 40px;
+    background-color: #fff8e1;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Sección izquierda y derecha con altura igual */
+  .left-section, .right-section {
+    background-color: #fffef0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Títulos */
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #d84315;
+    margin-bottom: 20px;
+    font-family: 'Caveat', cursive;
+  }
+  
+  /* Botón Finalizar */
+  .confirm-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #43a047;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .confirm-btn:hover {
+    background-color: #2e7d32;
+  }
+  
+  /* Mensaje de error */
+  .error-msg {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .reservation-page-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .left-section, .right-section {
+      width: 90%;
+    }
+  }
+  

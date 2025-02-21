@@ -1,37 +1,99 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Mi Restaurante Admin</title>
   <base href="/">  <!-- ✅ Asegurar que esto está presente -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+<header>
+  <div class="wrapper">
+      <a class="nav-logo" href="#">
+        <img src="favicon.ico" alt="Logo de la aplicación">
+      </a>  
+      <div class="navigation-bar">
+          <div class="menu">
+              <span class="text-line">Tu restaurante de comida favorito.</span>
+              <ul class="menu-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" title="Hover text" href=""><ion-icon name="book-outline"></ion-icon><span>Carta</span></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" title="Hover text" href=""><ion-icon name="call-outline"></ion-icon><span>Reservar</span></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" id="openSidenavButton" title="Hover text" onclick="window.shoppingCartComponent.ejecutarComando()">
+                        <ion-icon name="cart-outline"></ion-icon></ion-icon>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" title="Hover text" href=""><ion-icon name="person-circle-sharp"></ion-icon></a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</header>
+
 <body>
-  
   <app-root></app-root>
+</body>
 
-  <!-- 🔥 Botón flotante para subir arriba -->
-  <button id="scrollTopBtn" class="scroll-top-btn" onclick="scrollToTop()">⬆️</button>
 
-  <script>
-    // Mostrar / ocultar el botón según el scroll
-    window.onscroll = function() { toggleScrollButton(); };
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Logo -->
+    <div class="footer-logo">
+      <a href="" onclick="scrollToTop()">
+        <img src="favicon.ico" alt="Logo del Restaurante">
+      </a>
+    </div>    
 
-    function toggleScrollButton() {
-      const btn = document.getElementById("scrollTopBtn");
-      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        btn.style.opacity = "1";
-        btn.style.visibility = "visible";
-      } else {
-        btn.style.opacity = "0";
-        btn.style.visibility = "hidden";
-      }
-    }
+    <!-- Enlaces de contacto -->
+    <div class="footer-links">
+      <ul>
+        <li>
+          <a href="mailto:restaurante@gmail.es">
+            <ion-icon name="mail-outline"></ion-icon> Email
+          </a>
+        </li>
+        <li>
+          <a href="https://twitter.com" target="_blank">
+            <ion-icon name="logo-twitter"></ion-icon> Twitter
+          </a>
+        </li>
+        <li>
+          <a href="https://facebook.com" target="_blank">
+            <ion-icon name="logo-facebook"></ion-icon> Facebook
+          </a>
+        </li>
+        <li>
+          <a href="https://instagram.com" target="_blank">
+            <ion-icon name="logo-instagram"></ion-icon> Instagram
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
 
-    // Scroll suave al hacer clic en el botón
-    function scrollToTop() {
+<!-- Sidenav -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(() => {
+      window.angularComponent = document.querySelector('app-root')?.__ngContext__?.[30];
+    }, 1000);
+  });
+</script>
+<!-- Scrool to Top -->
+<script>
+  function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  </script>
-</body>
+</script>
+<!-- Ionicons Scripts -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </html>
