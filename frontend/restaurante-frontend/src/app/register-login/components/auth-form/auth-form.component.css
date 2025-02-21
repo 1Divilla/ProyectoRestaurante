@@ -1,118 +1,250 @@
-/* Contenedor principal */
+/* Reset para evitar scroll */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Estilos generales para el contenedor */
 .auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff6b6b, #e63946);
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  /* Caja del formulario */
-  .auth-box {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 350px;
-    text-align: center;
-    animation: slideUp 1s ease-in-out;
-  }
-  
-  /* Título */
-  .auth-box h2 {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-  
-  /* Grupo de entrada */
-  .input-group {
-    display: flex;
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  transition: all 0.5s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Caja del formulario */
+.auth-box {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 40px;
+  box-sizing: border-box;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  overflow: hidden;
+  opacity: 1;
+  position: relative;
+  z-index: 2;
+}
+
+/* Imagen decorativa */
+.auth-image {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff6600;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  overflow: hidden;
+  opacity: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-image img {
+  max-width: 80%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
+
+.auth-image:hover img {
+  transform: scale(1.1);
+}
+
+/* Título */
+.auth-box h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+  animation: fadeInDown 0.5s ease;
+}
+
+/* Campos de entrada */
+.input-group {
+  margin-bottom: 15px;
+  width: 100%;
+  animation: fadeIn 0.5s ease;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+  outline: none;
+}
+
+/* Botón de envío */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #e05500;
+  transform: scale(1.05);
+}
+
+/* Texto para alternar entre login y registro */
+.toggle-text {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #555;
+  animation: fadeInUp 0.5s ease;
+}
+
+.toggle-text a {
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.toggle-text a:hover {
+  color: #e05500;
+  text-decoration: underline;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .auth-container {
     flex-direction: column;
-    text-align: left;
-    margin-bottom: 20px;
   }
-  
-  /* Etiquetas */
-  .input-group label {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 5px;
+
+  .auth-box,
+  .auth-image {
+    width: 100%;
+    height: 50vh;
   }
-  
-  /* Campos de entrada */
-  .input-group input {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease-in-out;
+}
+
+/* Posicionamiento dinámico basado en modo */
+.auth-box.left {
+  order: 1;
+  transform: translateX(0);
+}
+
+.auth-box.right {
+  order: 2;
+  transform: translateX(0);
+}
+
+.auth-image.left {
+  order: 2;
+  transform: translateX(0);
+}
+
+.auth-image.right {
+  order: 1;
+  transform: translateX(0);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  /* Efecto al enfocar los inputs */
-  .input-group input:focus {
-    border-color: #e63946;
-    box-shadow: 0 0 5px rgba(230, 57, 70, 0.5);
-    outline: none;
-    transform: scale(1.02);
+  to {
+    opacity: 1;
   }
-  
-  /* Botón */
-  .btn {
-    background: #e63946;
-    color: white;
-    padding: 12px 20px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  .btn:hover {
-    background: #ff6b6b;
-    transform: scale(1.05);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Texto de alternar entre Login y Registro */
-  .toggle-text {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: #666;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .toggle-text a {
-    color: #e63946;
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: bold;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .toggle-text a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Animaciones */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  @keyframes slideUp {
-    from {
-      transform: translateY(30px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
+}
+
+<!-- HTML actualizado -->
+<div class="auth-container">
+  <!-- Imagen -->
+  <div class="auth-image" [ngClass]="{ 'left': isRegisterMode, 'right': !isRegisterMode }">
+    <img [src]="isRegisterMode ? 'images/register.jpg' : 'images/login.jpg'" alt="Auth Image" />
+  </div>
+
+  <!-- Formulario -->
+  <div class="auth-box" [ngClass]="{ 'left': isRegisterMode, 'right': !isRegisterMode }">
+    <h2>{{ isRegisterMode ? 'Registro' : 'Iniciar Sesión' }}</h2>
+
+    <form (submit)="onSubmit()" class="auth-form">
+      <div class="input-group">
+        <label for="email">📧 Email:</label>
+        <input type="email" id="email" [(ngModel)]="email" name="email" required placeholder="Ingresa tu email" />
+      </div>
+
+      <!-- Solo para Registro -->
+      <div *ngIf="isRegisterMode">
+        <div class="input-group">
+          <label for="name">👤 Nombre Completo:</label>
+          <input type="text" id="name" [(ngModel)]="name" name="name" required placeholder="Tu nombre completo" />
+        </div>
+
+        <div class="input-group">
+          <label for="phone">📞 Teléfono:</label>
+          <input type="tel" id="phone" [(ngModel)]="phone" name="phone" required placeholder="Tu número de teléfono" />
+        </div>
+
+        <div class="input-group">
+          <label for="confirm-password">🔑 Confirmar Contraseña:</label>
+          <input type="password" id="confirm-password" [(ngModel)]="confirmPassword" name="confirmPassword" required placeholder="Repite la contraseña" />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="password">🔒 Contraseña:</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required placeholder="Ingresa tu contraseña" />
+      </div>
+
+      <button type="submit" class="btn">{{ isRegisterMode ? 'Registrarse' : 'Ingresar' }}</button>
+    </form>
+
+    <p class="toggle-text">
+      {{ isRegisterMode ? '¿Ya tienes una cuenta?' : '¿No tienes cuenta aún?' }}
+      <a (click)="toggleMode()">{{ isRegisterMode ? 'Iniciar Sesión' : 'Regístrate' }}</a>
+    </p>
+  </div>
+</div>

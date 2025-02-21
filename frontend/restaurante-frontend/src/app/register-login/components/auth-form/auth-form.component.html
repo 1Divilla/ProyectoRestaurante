@@ -1,43 +1,50 @@
-<link rel="stylesheet" href="auth-form.component.css">
+
+<!-- HTML actualizado -->
 <div class="auth-container">
-  <div class="auth-box">
+  <!-- Imagen -->
+  <div class="auth-image" [ngClass]="{ 'left': isRegisterMode, 'right': !isRegisterMode }">
+    <img [src]="isRegisterMode ? 'images/register.jpg' : 'images/login.jpg'" alt="Auth Image" />
+  </div>
+
+  <!-- Formulario -->
+  <div class="auth-box" [ngClass]="{ 'left': isRegisterMode, 'right': !isRegisterMode }">
     <h2>{{ isRegisterMode ? 'Registro' : 'Iniciar Sesión' }}</h2>
-    
+
     <form (submit)="onSubmit()" class="auth-form">
       <div class="input-group">
         <label for="email">📧 Email:</label>
-        <input type="email" id="email" [(ngModel)]="email" required placeholder="Ingresa tu email" />
+        <input type="email" id="email" [(ngModel)]="email" name="email" required placeholder="Ingresa tu email" />
       </div>
 
-      <!-- 🔹 Campo Nombre (Solo para Registro) -->
-      <div class="input-group" *ngIf="isRegisterMode">
-        <label for="name">👤 Nombre Completo:</label>
-        <input type="text" id="name" [(ngModel)]="name" required placeholder="Tu nombre completo" />
-      </div>
+      <!-- Solo para Registro -->
+      <div *ngIf="isRegisterMode">
+        <div class="input-group">
+          <label for="name">👤 Nombre Completo:</label>
+          <input type="text" id="name" [(ngModel)]="name" name="name" required placeholder="Tu nombre completo" />
+        </div>
 
-      <!-- 🔹 Campo Teléfono (Solo para Registro) -->
-      <div class="input-group" *ngIf="isRegisterMode">
-        <label for="phone">📞 Teléfono:</label>
-        <input type="tel" id="phone" [(ngModel)]="phone" required placeholder="Tu número de teléfono" />
+        <div class="input-group">
+          <label for="phone">📞 Teléfono:</label>
+          <input type="tel" id="phone" [(ngModel)]="phone" name="phone" required placeholder="Tu número de teléfono" />
+        </div>
+
+        <div class="input-group">
+          <label for="confirm-password">🔑 Confirmar Contraseña:</label>
+          <input type="password" id="confirm-password" [(ngModel)]="confirmPassword" name="confirmPassword" required placeholder="Repite la contraseña" />
+        </div>
       </div>
 
       <div class="input-group">
         <label for="password">🔒 Contraseña:</label>
-        <input type="password" id="password" [(ngModel)]="password" required placeholder="Ingresa tu contraseña" />
-      </div>
-
-      <!-- 🔹 Confirmar Contraseña (Solo para Registro) -->
-      <div class="input-group" *ngIf="isRegisterMode">
-        <label for="confirm-password">🔑 Confirmar Contraseña:</label>
-        <input type="password" id="confirm-password" [(ngModel)]="confirmPassword" required placeholder="Repite la contraseña" />
+        <input type="password" id="password" [(ngModel)]="password" name="password" required placeholder="Ingresa tu contraseña" />
       </div>
 
       <button type="submit" class="btn">{{ isRegisterMode ? 'Registrarse' : 'Ingresar' }}</button>
     </form>
 
-    <!-- 🔹 Botón para cambiar entre Login y Registro -->
     <p class="toggle-text">
       {{ isRegisterMode ? '¿Ya tienes una cuenta?' : '¿No tienes cuenta aún?' }}
       <a (click)="toggleMode()">{{ isRegisterMode ? 'Iniciar Sesión' : 'Regístrate' }}</a>
     </p>
- 
+  </div>
+</div>
