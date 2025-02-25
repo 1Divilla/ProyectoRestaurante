@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     #NUESTRAS APPS
     'menu',
+    'order'
     
 ]
 
