@@ -20,6 +20,7 @@ class Plato(models.Model):
     ]
 
     nombre = models.CharField(max_length=200)
+    nickname = models.CharField(max_length=200, blank=True)
     descripcion = models.TextField(blank=True, null=True)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
     disponibilidad = models.BooleanField(default=True)
