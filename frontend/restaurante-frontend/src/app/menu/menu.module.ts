@@ -4,6 +4,8 @@ import { MenuRoutingModule } from './menu-routing.module';
 import { MenuItemsComponent } from './components/menu-items/menu-items.component';
 import { ModalItemsComponent } from './components/modal-items/modal-items.component';
 import { CartaComponent } from './pages/carta/carta.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   imports: [
@@ -11,7 +13,8 @@ import { CartaComponent } from './pages/carta/carta.component';
     MenuRoutingModule,
     MenuItemsComponent,
     ModalItemsComponent,
-    CartaComponent
+    CartaComponent,
+    HttpClientModule  
   ]
 })
 export class MenuModule { }

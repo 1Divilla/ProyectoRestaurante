@@ -48,7 +48,7 @@ header {
 }
 
 .nav-logo img {
-    height: 70px;
+    height: 100px;
     padding: 0 10px 0;
     transition: transform 0.3s ease;
 }
@@ -121,7 +121,7 @@ footer {
 }
 
 .footer-logo img {
-    height: 60px;
+    height: 100px;
     transition: transform 0.3s ease;
 }
 

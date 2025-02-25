@@ -12,5 +12,5 @@ urlpatterns = [
     path('platos/', PlatoListCreateAPIView.as_view(), name='plato-list-create'),
     path('platos/<int:pk>/', PlatoDetailAPIView.as_view(), name='plato-detail'),
     path('platos/disponibles/', PlatosDisponiblesAPIView.as_view(), name='platos-disponibles'),
-    path('platos/categoria/<int:categoria_id>/', PlatosPorCategoriaAPIView.as_view(), name='platos-por-categoria'),
+    path('platos/categoría/<int:categoría>/', PlatosPorCategoriaAPIView.as_view(), name='platos-por-categoria'),
 ]

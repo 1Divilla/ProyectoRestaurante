@@ -9,7 +9,7 @@
       <li class="sidebar-item" *ngFor="let item of cartItems; let i = index">
         <img [src]="item.imagen" alt="{{ item.nombre }}" width="50" height="50">
         <div class="item-details">
-          <span class="item-name">{{ item.nickname }}</span>
+          <span class="item-name">{{ item.nombre }}</span>
           <span class="item-price">{{ item.precio | currency:'EUR' }}</span>
           <div class="item-quantity">
             <button mat-mini-button color="primary" (click)="cartService.decreaseQuantity(i)">-</button>
