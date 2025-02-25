@@ -96,7 +96,7 @@
 /* 🔥 Grid responsivo */
 .items-container {
     display: grid;
-    grid-template-columns: repeat(4, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 10px;
     justify-items: center;
     width: 100%;
@@ -181,6 +181,6 @@
     }
 
     .items-container {
-        grid-template-columns: repeat(4, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
