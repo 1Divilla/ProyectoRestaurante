@@ -4,6 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.urls import path
 from django.contrib.auth.models import User
+from django.conf import settings
+
 
 # MODELOS
 class Pedido(models.Model):
@@ -15,7 +17,7 @@ class Pedido(models.Model):
     ]
 
     id = models.AutoField(primary_key=True)
-    cliente = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pedidos')
+    cliente = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pedidos')
     fecha_hora = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(max_digits=10, decimal_places=2)
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='pendiente')

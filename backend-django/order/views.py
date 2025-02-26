@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from .models import Pedido
 from .serializers import PedidoSerializer
 
@@ -8,11 +9,13 @@ class PedidoListCreateAPIView(APIView):
     """
     Vista para listar y crear pedidos.
     """
+    permission_classes = [IsAuthenticated]  # Asegurar que el usuario esté autenticado
+
     def get(self, request, *args, **kwargs):
         """
-        Listar todos los pedidos.
+        Listar pedidos del usuario autenticado.
         """
-        pedidos = Pedido.objects.all()
+        pedidos = Pedido.objects.filter(usuario=request.user)  # 🔥 Filtra solo pedidos del usuario actual
         serializer = PedidoSerializer(pedidos, many=True)
         return Response(serializer.data)
 
@@ -22,7 +25,7 @@ class PedidoListCreateAPIView(APIView):
         """
         serializer = PedidoSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(usuario=request.user)  # 🔥 Asigna automáticamente el usuario autenticado
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

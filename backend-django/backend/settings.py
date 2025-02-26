@@ -40,13 +40,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     #NUESTRAS APPS
-<<<<<<< HEAD
     'menu',  # Ruben 
     'users', # Marcell 
-=======
-    'menu',
     'order'
->>>>>>> 2b83e5414bfa134f5d43efc0d9487fb8499783fc
+
     
 ]
 # Modelo personalizado de usuario

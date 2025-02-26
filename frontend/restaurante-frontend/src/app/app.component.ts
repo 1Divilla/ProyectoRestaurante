@@ -1,6 +1,7 @@
-import { Component, HostListener, ViewChild, OnInit, Renderer2 } from '@angular/core';
+import { Component, HostListener, ViewChild, OnInit, Renderer2, Inject, PLATFORM_ID, ElementRef } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 import { DescriptionComponent } from './home/components/description/description.component';
 import { FeaturedDishesComponent } from './home/components/featured-dishes/featured-dishes.component';
 import { ImgComponent } from './home/components/img/img.component';
@@ -17,36 +18,44 @@ export class AppComponent implements OnInit {
   showScrollButton = false;
 
   @ViewChild(ShoppingCartComponent) myComponent!: ShoppingCartComponent;
+  @ViewChild('mainHeader', { static: false }) header!: ElementRef;
+  @ViewChild('mainFooter', { static: false }) footer!: ElementRef;
 
-  constructor(private router: Router, private renderer: Renderer2) {}
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
-    // Escucha cambios en la navegación
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      const header = document.getElementById('main-header');
-      const footer = document.getElementById('main-footer');
+    if (isPlatformBrowser(this.platformId)) {
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe((event: NavigationEnd) => {
+        const isAuthRoute = event.urlAfterRedirects.includes('/login') || event.urlAfterRedirects.includes('/register');
 
-      const isAuthRoute = event.urlAfterRedirects.includes('/login') || event.urlAfterRedirects.includes('/register');
+        if (this.header) {
+          this.renderer.setStyle(this.header.nativeElement, 'display', isAuthRoute ? 'none' : 'block');
+        }
 
-      if (header) {
-        this.renderer.setStyle(header, 'display', isAuthRoute ? 'none' : 'block');
-      }
-
-      if (footer) {
-        this.renderer.setStyle(footer, 'display', isAuthRoute ? 'none' : 'block');
-      }
-    });
+        if (this.footer) {
+          this.renderer.setStyle(this.footer.nativeElement, 'display', isAuthRoute ? 'none' : 'block');
+        }
+      });
+    }
   }
 
   @HostListener("window:scroll", [])
   onScroll(): void {
-    this.showScrollButton = window.scrollY > 200;
+    if (isPlatformBrowser(this.platformId)) {
+      this.showScrollButton = window.scrollY > 200;
+    }
   }
 
   scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   executeSidenav() {
