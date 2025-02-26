@@ -1,9 +1,9 @@
+from django.conf import settings  # ✅ Importamos settings para usar AUTH_USER_MODEL
 from django.db import models
 from rest_framework import serializers, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.urls import path
-from django.contrib.auth.models import User
 
 # MODELOS
 class Pedido(models.Model):
@@ -15,14 +15,14 @@ class Pedido(models.Model):
     ]
 
     id = models.AutoField(primary_key=True)
-    cliente = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pedidos')
+    cliente = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pedidos')  # ✅ Ahora apunta a CustomUser
     fecha_hora = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(max_digits=10, decimal_places=2)
-    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='pendiente')
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='en_proceso')  # Corrige el default
     direccion_envio = models.TextField()
 
     def __str__(self):
-        return f'Pedido {self.id} - {self.cliente.username}'
+        return f'Pedido {self.id} - {self.cliente.email}'  # Cambié username a email (porque en CustomUser usas email)
     
 # SERIALIZERS
 class PedidoSerializer(serializers.ModelSerializer):
@@ -48,4 +48,3 @@ class PedidoListCreateAPIView(APIView):
 urlpatterns = [
     path('api/pedidos/', PedidoListCreateAPIView.as_view(), name='pedido-list-create')
 ]
-

@@ -38,17 +38,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',  # 🔥 Habilita autenticación por tokens
     'corsheaders',
     #NUESTRAS APPS
-<<<<<<< HEAD
     'menu',  # Ruben 
     'users', # Marcell 
-=======
-    'menu',
-    'order'
->>>>>>> 2b83e5414bfa134f5d43efc0d9487fb8499783fc
+    'order',
+
     
 ]
+# REST FRAMEWORK 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # 🔥 Asegurar autenticación con tokens
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
 # Modelo personalizado de usuario
 AUTH_USER_MODEL = 'users.CustomUser'
 # Redirigir al usuario después de iniciar sesión exitoso

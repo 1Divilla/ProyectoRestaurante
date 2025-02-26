@@ -1,11 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-form',
   templateUrl: './auth-form.component.html',
-  styleUrls: ['./auth-form.component.css'], // ✅ Usa styleUrls en vez de styles
+  styleUrls: ['./auth-form.component.css'], 
   standalone: true,
   imports: [FormsModule, CommonModule]
 })
@@ -18,6 +20,10 @@ export class AuthFormComponent {
   phone: string = '';
   password: string = '';
   confirmPassword: string = '';
+  direccion?: string;
+  rol?: string = "usuario"
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   toggleMode() {
     this.isRegisterMode = !this.isRegisterMode;
@@ -44,12 +50,22 @@ export class AuthFormComponent {
         return;
       }
 
-      this.formSubmit.emit({
-        mode: 'register',
-        name: this.name,
+      const userData = {
+        nombre: this.name,
         email: this.email,
-        phone: this.phone,
-        password: this.password
+        numero_telefono: this.phone,
+        password: this.password,
+        direccion: this.direccion || "",  // Valor por defecto si no está definido
+        rol: "usuario"  // Valor por defecto
+      };
+      
+      
+
+      this.authService.register(userData).subscribe(response => {
+        this.authService.saveUserData(response);
+        this.router.navigate(['/home']);
+      }, error => {
+        console.error('Error en registro', error);
       });
 
     } else {
@@ -58,10 +74,16 @@ export class AuthFormComponent {
         return;
       }
 
-      this.formSubmit.emit({
-        mode: 'login',
+      const credentials = {
         email: this.email,
         password: this.password
+      };
+
+      this.authService.login(credentials).subscribe(response => {
+        this.authService.saveUserData(response);
+        this.router.navigate(['/home']);
+      }, error => {
+        console.error('Error en login', error);
       });
     }
   }

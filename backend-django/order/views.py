@@ -1,25 +1,26 @@
 from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Pedido
-from .serializers import PedidoSerializer
+from rest_framework.response import Response
+from order.models import Pedido
+from order.serializers import PedidoSerializer
+from django.shortcuts import get_object_or_404
 
 class PedidoListCreateAPIView(APIView):
-    """
-    Vista para listar y crear pedidos.
-    """
-    def get(self, request, *args, **kwargs):
-        """
-        Listar todos los pedidos.
-        """
-        pedidos = Pedido.objects.all()
+    def get(self, request):
+        # Obtener el parámetro cliente_id de la URL
+        cliente_id = request.query_params.get('cliente_id', None)
+
+        if cliente_id:
+            # Filtrar pedidos por cliente si el parámetro está presente
+            pedidos = Pedido.objects.filter(cliente__id=cliente_id)
+        else:
+            # Obtener todos los pedidos si no se proporciona un cliente_id
+            pedidos = Pedido.objects.all()
+        
         serializer = PedidoSerializer(pedidos, many=True)
         return Response(serializer.data)
 
-    def post(self, request, *args, **kwargs):
-        """
-        Crear un nuevo pedido.
-        """
+    def post(self, request):
         serializer = PedidoSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
