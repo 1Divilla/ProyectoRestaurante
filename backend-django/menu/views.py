@@ -16,12 +16,12 @@ class PlatoListCreateAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 class PlatosPorCategoriaAPIView(APIView):
-    def get(self, request, categoria_id):
-        platos = Plato.objects.filter(categoria_id=categoria_id)
+    def get(self, request, categoría):
+        platos = Plato.objects.filter(categoría=categoría)
         serializer = PlatoSerializer(platos, many=True)
         return Response(serializer.data)
+
 
 class PlatoDetailAPIView(APIView):
     def get_object(self, pk):
@@ -61,11 +61,5 @@ class CategoriaListCreateAPIView(generics.ListCreateAPIView):
 class PlatosDisponiblesAPIView(APIView):
     def get(self, request):
         platos = Plato.objects.filter(disponibilidad=True)
-        serializer = PlatoSerializer(platos, many=True)
-        return Response(serializer.data)
-
-class PlatosPorCategoriaAPIView(APIView):
-    def get(self, request, categoria):
-        platos = Plato.objects.filter(categoria=categoria)
         serializer = PlatoSerializer(platos, many=True)
         return Response(serializer.data)

@@ -5,22 +5,22 @@
   <title>Mi Restaurante Admin</title>
   <base href="/">  <!-- ✅ Asegurar que esto está presente -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="/images/logo.png">
 </head>
 <header id="main-header">
   <div class="wrapper">
       <a class="nav-logo" href="#">
-        <img src="favicon.ico" alt="Logo de la aplicación">
+        <img src="/images/logo.png" alt="Logo de la aplicación">
       </a>  
       <div class="navigation-bar">
           <div class="menu">
               <span class="text-line">Tu restaurante de comida favorito.</span>
               <ul class="menu-nav">
                   <li class="nav-item">
-                      <a class="nav-link" title="Hover text" href=""><ion-icon name="book-outline"></ion-icon><span>Carta</span></a>
+                      <a class="nav-link" title="Hover text" href="/menu"><ion-icon name="book-outline"></ion-icon><span>Carta</span></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" title="Hover text" href=""><ion-icon name="call-outline"></ion-icon><span>Reservar</span></a>
+                      <a class="nav-link" title="Hover text" href="/reservation"><ion-icon name="call-outline"></ion-icon><span>Reservar</span></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" id="openSidenavButton" title="Hover text" onclick="window.shoppingCartComponent.ejecutarComando()">
@@ -46,7 +46,7 @@
     <!-- Logo -->
     <div class="footer-logo">
       <a href="" onclick="scrollToTop()">
-        <img src="favicon.ico" alt="Logo del Restaurante">
+        <img src="/images/logo.png" alt="Logo del Restaurante">
       </a>
     </div>    
 

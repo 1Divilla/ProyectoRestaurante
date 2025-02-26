@@ -8,17 +8,18 @@
     border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.8s ease-in-out;
-    
+
     /* 🔥 Hace que ocupe toda la pantalla */
     min-height: 100vh; /* Al menos la altura de la pantalla */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
-/* 🔥 Asegura que el contenido de las categorías se expanda correctamente */
+/* 🔥 Asegura que el contenido se expanda correctamente */
 .menu-content {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Animación de entrada */
@@ -44,6 +45,7 @@
     justify-content: center;
     margin-bottom: 20px;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .filter-button {
@@ -73,15 +75,11 @@
 
 /* 🔥 Estilos de categorías */
 .category {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     animation: fadeIn 1s ease-in-out;
 }
 
-/* 🔥 Ajuste de altura en caso de pocas categorías */
-.category:last-child {
-    flex-grow: 1; /* Hace que la última categoría empuje el contenido para llenar la pantalla */
-}
-
+/* 🔥 Título de categoría */
 .category-title {
     font-size: 2em;
     border-bottom: 3px solid #c0392b;
@@ -98,9 +96,10 @@
 /* 🔥 Grid responsivo */
 .items-container {
     display: grid;
-    grid-template-columns: repeat(4, minmax(280px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 10px;
     justify-items: center;
+    width: 100%;
 }
 
 /* 🔥 Tarjetas de los productos */
@@ -147,6 +146,7 @@
 .item-info {
     padding: 15px;
     background: #fff;
+    flex-grow: 1;
 }
 
 /* 🔥 Nombre del platillo */
@@ -165,10 +165,22 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* 🔥 Espaciado extra cuando hay pocos elementos */
+/* 🔥 Mensaje si no hay platos */
+.no-items-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #7f8c8d;
+    margin-top: 20px;
+}
+
+/* 🔥 Espaciado extra en pantallas pequeñas */
 @media (max-width: 768px) {
     .menu-container {
         min-height: 100vh;
         padding-bottom: 40px;
+    }
+
+    .items-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
