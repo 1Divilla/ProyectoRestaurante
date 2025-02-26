@@ -1,84 +1,48 @@
-from rest_framework import status
-from rest_framework.views import APIView
+from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from .models import Pedido
 from .serializers import PedidoSerializer
+from rest_framework import status
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from order.models import Pedido
-from order.serializers import PedidoSerializer
 from django.shortcuts import get_object_or_404
 
-class PedidoListCreateAPIView(APIView):
+class PedidoViewSet(viewsets.ModelViewSet):
     """
-    Vista para listar y crear pedidos.
+    API para listar, crear, actualizar y eliminar pedidos.
     """
-    permission_classes = [IsAuthenticated]  # Asegurar que el usuario esté autenticado
+    queryset = Pedido.objects.all()  # ✅ Agregar queryset para evitar error
+    serializer_class = PedidoSerializer
+    permission_classes = [IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
+    def get_queryset(self):
         """
-        Listar pedidos del usuario autenticado.
+        Filtra los pedidos:
+        - Si el usuario es gerente, ve todos los pedidos.
+        - Si el usuario es cliente, solo ve los suyos.
         """
-        pedidos = Pedido.objects.filter(usuario=request.user)  # 🔥 Filtra solo pedidos del usuario actual
+        if self.request.user.rol == "gerente":
+            return Pedido.objects.all()
+        return Pedido.objects.filter(cliente=self.request.user)
 
-class PedidoListCreateAPIView(APIView):
-    def get(self, request):
-        # Obtener el parámetro cliente_id de la URL
-        cliente_id = request.query_params.get('cliente_id', None)
-
-        if cliente_id:
-            # Filtrar pedidos por cliente si el parámetro está presente
-            pedidos = Pedido.objects.filter(cliente__id=cliente_id)
-        else:
-            # Obtener todos los pedidos si no se proporciona un cliente_id
-            pedidos = Pedido.objects.all()
-        
-        serializer = PedidoSerializer(pedidos, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = PedidoSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(usuario=request.user)  # 🔥 Asigna automáticamente el usuario autenticado
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def destroy(self, request, *args, **kwargs):
+        """
+        Permite a los gerentes cancelar pedidos.
+        """
+        pedido = self.get_object()
+        if request.user.rol != "gerente":
+            return Response({"error": "No tienes permiso para cancelar pedidos"}, status=status.HTTP_403_FORBIDDEN)
+        pedido.delete()
+        return Response({"message": "Pedido cancelado correctamente"}, status=status.HTTP_200_OK)
 
 
 class PedidoDetailAPIView(APIView):
-    """
-    Vista para obtener, actualizar y eliminar un pedido específico.
-    """
-    def get_object(self, pk):
-        """
-        Obtener un pedido específico o lanzar un error 404 si no existe.
-        """
-        try:
-            return Pedido.objects.get(pk=pk)
-        except Pedido.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk, *args, **kwargs):
-        """
-        Obtener un pedido específico.
-        """
-        pedido = self.get_object(pk)
-        serializer = PedidoSerializer(pedido)
-        return Response(serializer.data)
-
-    def put(self, request, pk, *args, **kwargs):
-        """
-        Actualizar un pedido específico.
-        """
-        pedido = self.get_object(pk)
-        serializer = PedidoSerializer(pedido, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
     def delete(self, request, pk, *args, **kwargs):
         """
         Eliminar un pedido específico.
         """
-        pedido = self.get_object(pk)
+        pedido = get_object_or_404(Pedido, pk=pk)
         pedido.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "Pedido eliminado correctamente"}, status=status.HTTP_204_NO_CONTENT)

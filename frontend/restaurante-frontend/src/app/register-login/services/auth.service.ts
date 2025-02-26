@@ -69,6 +69,25 @@ export class AuthService {
     console.log("🔍 Usuario autenticado:", user);  // 🔥 Depuración
     return user && user.rol && user.rol.toLowerCase() === 'gerente'; // 🔥 Comparación en minúsculas
   }
+  getCurrentUser(): Observable<any> {
+    const token = this.getToken();
+    if (!token) {
+      console.error("❌ No hay token disponible para obtener el usuario");
+      return new Observable(observer => observer.error("No hay token disponible"));
+    }
+  
+    return this.http.get(`${this.apiUrl}me/`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${token}`
+      })
+    }).pipe(
+      catchError(error => {
+        console.error("❌ Error al obtener el usuario:", error);
+        throw error;
+      })
+    );
+  }
   
 
 }

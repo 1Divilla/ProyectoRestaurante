@@ -10,6 +10,19 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated  # 🔥 Agrega esta línea
+from rest_framework import viewsets
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.contrib.auth import authenticate
+from users.models import CustomUser
+from users.serializers import CustomUserSerializer
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.hashers import check_password
+from django.shortcuts import get_object_or_404
+
 
 
 
@@ -49,7 +62,14 @@ class LoginAPIView(APIView):
         })
 
 
+class ClienteDetailAPIView(APIView):
+    permission_classes = [IsAuthenticated]  # ✅ Requiere autenticación
 
+    def get(self, request, pk, *args, **kwargs):
+        cliente = get_object_or_404(CustomUser, pk=pk)  # ✅ Asegura que el usuario existe
+        serializer = CustomUserSerializer(cliente)
+        return Response(serializer.data)
+    
 class RegisterAPIView(APIView):
     def post(self, request):
         serializer = CustomUserSerializer(data=request.data)
