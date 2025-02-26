@@ -3,11 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent }, // ✅ Página principal del admin
-  { path: 'orders', component: OrdersComponent }, // ✅ Página de pedidos
-  { path: 'reservations', component: ReservationsComponent } // ✅ Página de reservas
+  { path: '', component: DashboardComponent, canActivate:[AdminGuard] }, // ✅ Página principal del admin
+  { path: 'orders', component: OrdersComponent,canActivate:[AdminGuard] }, // ✅ Página de pedidos
+  { path: 'reservations', component: ReservationsComponent,canActivate:[AdminGuard] } // ✅ Página de reservas
 ];
 
 @NgModule({
