@@ -9,8 +9,10 @@ export class AdminGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): boolean {
-    if (this.authService.isGerente()) {
-      this.router.navigate(['/admin']); // 🔥 Redirigir manualmente
+    const isGerente = this.authService.isGerente();
+    console.log("🔍 Intento de acceso al Admin - ¿Es gerente?:", isGerente);  // 🔥 Depuración
+  
+    if (isGerente) {
       return true;
     } else {
       alert('Acceso denegado. No tienes permisos para acceder a esta página.');
@@ -18,4 +20,4 @@ export class AdminGuard implements CanActivate {
       return false;
     }
   }
-}
+}  

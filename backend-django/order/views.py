@@ -1,9 +1,12 @@
 from rest_framework import status
 from rest_framework.views import APIView
-<<<<<<< HEAD
 from rest_framework.permissions import IsAuthenticated
 from .models import Pedido
 from .serializers import PedidoSerializer
+from rest_framework.response import Response
+from order.models import Pedido
+from order.serializers import PedidoSerializer
+from django.shortcuts import get_object_or_404
 
 class PedidoListCreateAPIView(APIView):
     """
@@ -16,11 +19,6 @@ class PedidoListCreateAPIView(APIView):
         Listar pedidos del usuario autenticado.
         """
         pedidos = Pedido.objects.filter(usuario=request.user)  # 🔥 Filtra solo pedidos del usuario actual
-=======
-from rest_framework.response import Response
-from order.models import Pedido
-from order.serializers import PedidoSerializer
-from django.shortcuts import get_object_or_404
 
 class PedidoListCreateAPIView(APIView):
     def get(self, request):
@@ -34,7 +32,6 @@ class PedidoListCreateAPIView(APIView):
             # Obtener todos los pedidos si no se proporciona un cliente_id
             pedidos = Pedido.objects.all()
         
->>>>>>> 13ec01d80b240730dc7527bb2e0b422e082c2df7
         serializer = PedidoSerializer(pedidos, many=True)
         return Response(serializer.data)
 

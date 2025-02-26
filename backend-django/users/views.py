@@ -18,24 +18,35 @@ User = get_user_model()
 
 class LoginAPIView(APIView):
     def post(self, request):
-        print("🔍 Datos recibidos en Django:", request.data)  # Debug
+        print("🔍 Datos recibidos en Django:", request.data)  # 🔥 Depuración
 
         email = request.data.get("email")
         password = request.data.get("password")
 
         if not email or not password:
+            print("❌ Error: Faltan datos")
             return Response({"error": "Faltan datos"}, status=status.HTTP_400_BAD_REQUEST)
 
         user = User.objects.filter(email=email).first()
         if user is None:
+            print("❌ Error: Usuario no encontrado")
             return Response({"error": "Usuario no encontrado"}, status=status.HTTP_400_BAD_REQUEST)
 
         if not check_password(password, user.password):
+            print("❌ Error: Credenciales inválidas")
             return Response({"error": "Credenciales inválidas"}, status=status.HTTP_400_BAD_REQUEST)
 
         token, _ = Token.objects.get_or_create(user=user)
 
-        return Response({"token": token.key, "user": {"id": user.id, "email": user.email}})
+        return Response({
+            "token": token.key,
+            "user": {
+                "id": user.id,
+                "email": user.email,
+                "nombre": user.nombre,
+                "rol": user.rol
+            }
+        })
 
 
 

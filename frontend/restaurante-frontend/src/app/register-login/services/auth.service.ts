@@ -23,20 +23,22 @@ export class AuthService {
   
   
   
+ // login 
+ login(credentials: { email: string, password: string }): Observable<any> {
+  console.log("🔍 Enviando datos de login:", credentials);  // 🔥 Depuración
+  return this.http.post(`${this.apiUrl}login/`, credentials, {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  }).pipe(catchError(error => { throw error; }));
+}
 
-  // Inicio de sesión
-  login(credentials: { email: string, password: string }): Observable<any> {
-    console.log('🔍 Datos enviados al login:', credentials); // Agregar esta línea
-    return this.http.post(`${this.apiUrl}login/`, credentials, this.httpOptions)
-      .pipe(catchError(error => { throw error; }));
-  }
   
   
   // Guardar datos del usuario autenticado
   saveUserData(user: any) {
     if (user && user.token) {
+      console.log("🔍 Guardando usuario en localStorage:", user);  // 🔥 Depuración
       localStorage.setItem('token', user.token);
-      localStorage.setItem('user', JSON.stringify(user.user));
+      localStorage.setItem('user', JSON.stringify(user.user)); // 🔥 Debe incluir `rol`
     }
   }
 
@@ -63,8 +65,10 @@ export class AuthService {
   }
   // Verificar si el usuario es "gerente"
   isGerente(): boolean {
-  const user = this.getUser();
-  return user && user.rol === 'gerente';
-}
+    const user = this.getUser();
+    console.log("🔍 Usuario autenticado:", user);  // 🔥 Depuración
+    return user && user.rol && user.rol.toLowerCase() === 'gerente'; // 🔥 Comparación en minúsculas
+  }
+  
 
 }
