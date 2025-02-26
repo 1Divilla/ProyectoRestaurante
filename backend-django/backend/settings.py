@@ -40,9 +40,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     #NUESTRAS APPS
-    'menu',
+    'menu',  # Ruben 
+    'users', # Marcell 
     
 ]
+# Modelo personalizado de usuario
+AUTH_USER_MODEL = 'users.CustomUser'
+# Redirigir al usuario después de iniciar sesión exitoso
+LOGIN_REDIRECT_URL = '/api/usuarios/'  # O cualquier ruta válida de tu app
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
