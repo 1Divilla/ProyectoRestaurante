@@ -4,6 +4,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 interface OrderDetail {
   orderId: number;
   plato: string;
+  plato_nombre: string;
   cantidad: number;
   precio_unitario: number;
   total: number;
@@ -18,12 +19,7 @@ interface OrderDetail {
 export class OrderDetailsComponent implements OnChanges {
   @Input() orderId: number | null = null;
 
-  orderDetails: OrderDetail[] = [
-    { orderId: 1, plato: 'Pizza Margherita', cantidad: 2, precio_unitario: 8.50, total: 17.00 },
-    { orderId: 1, plato: 'Ensalada César', cantidad: 1, precio_unitario: 5.00, total: 5.00 },
-    { orderId: 2, plato: 'Hamburguesa Clásica', cantidad: 1, precio_unitario: 10.00, total: 10.00 },
-    { orderId: 2, plato: 'Papas Fritas', cantidad: 1, precio_unitario: 3.50, total: 3.50 }
-  ];
+  orderDetails: OrderDetail[] = [];
 
   filteredDetails: OrderDetail[] = [];
 

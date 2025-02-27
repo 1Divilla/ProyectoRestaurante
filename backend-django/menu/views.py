@@ -17,8 +17,8 @@ class PlatoListCreateAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class PlatosPorCategoriaAPIView(APIView):
-    def get(self, request, categoría):
-        platos = Plato.objects.filter(categoría=categoría)
+    def get(self, request, categoria):
+        platos = Plato.objects.filter(categoria=categoria)
         serializer = PlatoSerializer(platos, many=True)
         return Response(serializer.data)
 

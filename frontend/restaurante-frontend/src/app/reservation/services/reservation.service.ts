@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 interface Reserva {
@@ -15,9 +15,22 @@ interface Reserva {
   providedIn: 'root' // Hace que el servicio esté disponible en toda la app
 })
 export class ReservationService {
-  private apiUrl = 'http://127.0.0.1:8000/api/reservas/'; // Cambia por tu endpoint real
+  private apiUrl = 'http://127.0.0.1:8000/api/public-reservas/'; // Cambia por tu endpoint real
 
   constructor(private http: HttpClient) {}
+
+  createReservation(reservationData: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    const body = {
+      mesa: reservationData.mesa,                    // Nombre de la mesa
+      nombre_cliente: reservationData.nombre_cliente, // Nombre del cliente
+      personas: reservationData.people,
+      fecha_hora: `${reservationData.date}T${reservationData.time}:00Z`
+    };
+
+    return this.http.post(this.apiUrl, body, { headers });
+  }
 
   // Obtener todas las reservas
   getReservas(): Observable<Reserva[]> {

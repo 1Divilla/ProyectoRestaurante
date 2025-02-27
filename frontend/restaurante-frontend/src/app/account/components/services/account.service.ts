@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
@@ -8,13 +8,19 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AccountService {
   private apiBaseUrl = 'http://localhost:8000/api';
+  private apiBaseUrl2 = 'http://localhost:8000/';
+  private apiUrl = 'http://localhost:8000';
+
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
 
-  // Obtener usuario autenticado
+  // Obtener usuario autenticado desde localStorage
   getUser(): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.get<any>(`${this.apiBaseUrl}/users/me/`, { headers });
+    if (isPlatformBrowser(this.platformId)) {
+      const user = localStorage.getItem('user');
+      return of(user ? JSON.parse(user) : null);
+    }
+    return of(null);
   }
 
   // Método para obtener headers con token de autenticación
@@ -32,16 +38,14 @@ export class AccountService {
   }
 
   // Obtener pedidos del usuario autenticado
-  getUserOrders(): Observable<any[]> {
+  getUserOrders(userId: number): Observable<any[]> {
     const headers = this.getAuthHeaders();
-    return this.http.get<any[]>(`${this.apiBaseUrl}/orders/`, { headers });
-  }
+    return this.http.get<any[]>(`${this.apiBaseUrl2}/public/pedidos/${userId}/`);
+}
 
 
   // Obtener detalles de un pedido específico
-  getOrderDetails(orderId: number): Observable<any[]> {
-    const headers = this.getAuthHeaders();
-    return this.http.get<any[]>(`${this.apiBaseUrl}/orders_details/?order=${orderId}`, { headers });
-  }
-
+  getOrderDetails(orderId: number) {
+    return this.http.get(`${this.apiUrl}/public/order-details/${orderId}/`);
+  }  
 }

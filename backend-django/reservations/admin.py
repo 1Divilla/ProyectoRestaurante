@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Reservation
+from .models import Reserva
 
-@admin.register(Reservation)
+@admin.register(Reserva)
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'cliente', 'fecha_hora', 'numero_personas', 'estado')
-    list_filter = ('estado', 'fecha_hora')
-    search_fields = ('cliente__username', 'estado')
+    list_display = ('id', 'nombre_cliente', 'fecha_hora', 'personas', 'estado')  # Corrección de nombres
+    list_filter = ('estado', 'fecha_hora')  # Ahora 'estado' existe en el modelo
+    search_fields = ('nombre_cliente', 'estado')  # Eliminado 'cliente__username'

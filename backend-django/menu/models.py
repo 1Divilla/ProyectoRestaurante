@@ -24,7 +24,7 @@ class Plato(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
     disponibilidad = models.BooleanField(default=True)
-    categoría = models.ForeignKey(Categoria, related_name='platos', on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categoria, related_name='platos', on_delete=models.CASCADE)  # ✅ Ahora es 'categoria'
     alergenos = models.JSONField(default=list)
     cantidad = models.IntegerField(default=0)
     imagen = models.URLField(blank=True, null=True)
@@ -39,9 +39,13 @@ class CategoriaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PlatoSerializer(serializers.ModelSerializer):
+    categoria = serializers.PrimaryKeyRelatedField(queryset=Categoria.objects.all())  # ✅ Accede correctamente a 'categoria'
+
     class Meta:
         model = Plato
-        fields = '__all__'
+        fields = ['id', 'nombre', 'nickname', 'descripcion', 'precio', 'disponibilidad', 
+                  'categoria', 'alergenos', 'cantidad', 'imagen']
+
 
 # VISTAS PERSONALIZADAS
 class CategoriaListCreateAPIView(APIView):
@@ -109,7 +113,7 @@ class PlatosDisponiblesAPIView(APIView):
 
 class PlatosPorCategoriaAPIView(APIView):
     def get(self, request, categoria_id):
-        platos = Plato.objects.filter(categoria_id=categoria_id)
+        platos = Plato.objects.filter(categoria_id=categoria_id)  # ✅ Ahora usa 'categoria' sin tilde
         serializer = PlatoSerializer(platos, many=True)
         return Response(serializer.data)
 
@@ -121,4 +125,3 @@ urlpatterns = [
     path('api/platos/disponibles/', PlatosDisponiblesAPIView.as_view(), name='platos-disponibles'),
     path('api/platos/categoria/<int:categoria_id>/', PlatosPorCategoriaAPIView.as_view(), name='platos-por-categoria'),
 ]
-
