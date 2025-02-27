@@ -133,3 +133,192 @@
 .modal-hide {
   animation: fadeOut 0.3s ease-in-out forwards;
 }
+.admin-actions {
+  /* Mantén los estilos que ya tienes... */
+  background: rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: left;
+
+  /* Añade estas dos líneas */
+  max-height: 200px; /* Ajusta la altura máxima que desees */
+  overflow-y: auto;  /* Activa el scroll vertical cuando sea necesario */
+}
+/* Estilos para los campos de entrada en la sección de administración */
+.admin-actions input[type="text"],
+.admin-actions input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 16px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.admin-actions input[type="text"]:focus,
+.admin-actions input[type="number"]:focus {
+  border-color: #c0392b;
+  outline: none;
+}
+
+/* Estilos para las etiquetas dentro de admin-actions */
+.admin-actions label {
+  display: block;
+  margin: 12px 0 4px;
+  font-weight: bold;
+  color: #34495e;
+  font-size: 1em;
+}
+
+/* Estilos para los botones de editar y eliminar */
+.edit-button,
+.delete-button {
+  width: calc(50% - 10px);
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+}
+
+.edit-button {
+  background-color: #2980b9;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.edit-button:hover {
+  background-color: #1c598a;
+  transform: scale(1.05);
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+/* Ajuste en dispositivos pequeños */
+@media (max-width: 480px) {
+  .edit-button,
+  .delete-button {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+/* ===================== Estilos para la sección de administración ===================== */
+.admin-actions {
+  /* Fondo sutilmente diferenciado dentro del modal */
+  background: rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+/* Espaciado y estilo de las etiquetas */
+.admin-actions label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #34495e;
+  font-size: 1em;
+}
+
+/* Campos de texto y numéricos */
+.admin-actions input[type="text"],
+.admin-actions input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+  background: #fff;
+}
+
+/* Efecto al hacer foco en el campo */
+.admin-actions input[type="text"]:focus,
+.admin-actions input[type="number"]:focus {
+  border-color: #c0392b; /* mismo rojo vibrante del título */
+  outline: none;
+}
+
+/* Contenedor para ubicar los botones de forma más ordenada */
+.admin-actions .button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Separación horizontal entre botones */
+  margin-top: 15px;
+}
+
+/* Botón de guardar (edit-button) */
+.edit-button {
+  background-color: #2980b9; /* Azul fuerte */
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 15px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.edit-button:hover {
+  background-color: #1c598a; /* Azul más oscuro */
+  transform: scale(1.05);
+}
+
+.edit-button:active {
+  transform: scale(0.95);
+}
+
+/* Botón de eliminar (delete-button) */
+.delete-button {
+  background-color: #e74c3c; /* Rojo brillante */
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 15px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.delete-button:hover {
+  background-color: #c0392b; /* Rojo más oscuro */
+  transform: scale(1.05);
+}
+
+.delete-button:active {
+  transform: scale(0.95);
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 480px) {
+  .admin-actions {
+    padding: 15px;
+  }
+
+  .admin-actions .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

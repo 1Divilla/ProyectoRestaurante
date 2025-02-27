@@ -62,7 +62,24 @@ export class MenuItemsComponent implements OnInit {
     this.isModalOpen = true;
   }
 
+  
+
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  actualizarPlato() {
+    if (this.selectedItem.id !== undefined) {
+      this.menuService.updatePlato(this.selectedItem.id, this.selectedItem).subscribe(() => {
+        alert("Plato actualizado correctamente ✅");
+        this.closeModal();
+        this.filtrarMenu(this.categoriaSeleccionada); // Recargar la lista con el filtro actual
+      }, error => {
+        console.error("Error al actualizar el plato ❌:", error);
+        alert("Hubo un error al actualizar el plato ❌");
+      });
+    } else {
+      alert("Error: No se puede actualizar un plato sin ID ❌");
+    }
   }
 }

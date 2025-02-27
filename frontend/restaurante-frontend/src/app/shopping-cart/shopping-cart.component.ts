@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shopping-cart',
+  standalone: true,
   imports: [RouterOutlet, CommonModule, MatSidenavModule, MatButtonModule, FormsModule],
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
@@ -19,16 +20,19 @@ export class ShoppingCartComponent {
   reason = '';
   shouldRun = false;
   cartItems: any[] = [];
-  apiUrl = 'http://localhost:8000/api'; // URL base de la API pública
-  apiUrl2 = 'http://localhost:8000/public'; // URL base de la API pública
-
+  apiUrl = 'http://localhost:8000/api'; // URL base de la API
+  apiUrl2 = 'http://localhost:8000/public'; // Otra URL de la API pública
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     public cartService: CartService,
     public dialog: MatDialog,
     private http: HttpClient
+<<<<<<< HEAD
   ) { }
+=======
+  ) {}
+>>>>>>> 4e1ca33e9a1f00c5bffd93e2f41d1cc5ab0c3d32
 
   ngOnInit() {
     this.cartService.cartItems$.subscribe(items => {
@@ -95,29 +99,32 @@ export class ShoppingCartComponent {
       cliente: user.id
     };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4e1ca33e9a1f00c5bffd93e2f41d1cc5ab0c3d32
     // Enviar el pedido a la API REST
     this.http.post(`${this.apiUrl}/pedidos/`, pedido).subscribe(
       (pedidoResponse: any) => {
         console.log('✅ Pedido creado:', pedidoResponse);
 
-        // Enviar cada producto como un detalle del pedido con el nombre en lugar del ID
+        // Enviar cada producto como un detalle del pedido
         this.cartItems.forEach(item => {
           const detalle = {
             order: pedidoResponse.id,
-            plato: item.id,
+            plato_nombre: item.nombre,  // ✅ Guardamos el nombre en lugar del ID
             cantidad: item.cantidad,
             precio_unitario: item.precio,
             total: item.cantidad * item.precio  // ✅ Enviar total calculado
           };
 
-
-
-
           console.log("📌 Enviando detalle:", JSON.stringify(detalle, null, 2));
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4e1ca33e9a1f00c5bffd93e2f41d1cc5ab0c3d32
           this.http.post(`${this.apiUrl2}/order-details/`, detalle).subscribe(
             detalleResponse => console.log('✅ Detalle guardado:', detalleResponse),
             error => console.error('❌ Error al guardar detalle:', error)
@@ -130,12 +137,12 @@ export class ShoppingCartComponent {
       error => console.error('❌ Error al crear pedido:', error)
     );
   }
-
-
 }
 
+// ✅ AddressDialogComponent corregido y sin duplicados
 @Component({
   selector: 'app-address-dialog',
+  standalone: true,
   imports: [FormsModule],
   template: `
     <div class="dialog-container">

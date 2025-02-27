@@ -10,6 +10,7 @@ from menu.models import Plato  # Importar el modelo de Plato
 from menu.models import Plato  # Importar modelo Plato
 
 class OrderDetailsPublicCreateAPIView(APIView):
+<<<<<<< HEAD
     permission_classes = [AllowAny]  
 
     def post(self, request, *args, **kwargs):
@@ -30,6 +31,20 @@ class OrderDetailsPublicCreateAPIView(APIView):
         data["plato"] = plato.id  
 
         serializer = OrderDetailsSerializer(data=data)
+=======
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        print("📌 Datos recibidos en Django:", request.data)  # 🔥 Ver qué está llegando desde el frontend
+        
+    permission_classes = [AllowAny]  # ✅ Permitir acceso sin autenticación
+
+    def post(self, request, *args, **kwargs):
+        """
+        Crea un nuevo detalle de pedido sin necesidad de autenticación.
+        """
+        serializer = OrderDetailsSerializer(data=request.data)
+>>>>>>> 4e1ca33e9a1f00c5bffd93e2f41d1cc5ab0c3d32
         if serializer.is_valid():
             print("✅ Datos validados en el serializer:", serializer.validated_data)
             serializer.save()
@@ -38,8 +53,12 @@ class OrderDetailsPublicCreateAPIView(APIView):
         print("❌ Errores en validación:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+<<<<<<< HEAD
 
 
+=======
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+>>>>>>> 4e1ca33e9a1f00c5bffd93e2f41d1cc5ab0c3d32
 class OrderDetailsPublicAPIView(APIView):
     permission_classes = [AllowAny]  # ✅ Permitir acceso sin autenticación
 

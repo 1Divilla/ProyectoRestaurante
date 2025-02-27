@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+import { TestBed } from '@angular/core/testing';
+
+import { ReservationService } from './reservation.service';
+
+describe('ReservationService', () => {
+  let service: ReservationService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ReservationService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
+=======
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -27,3 +45,4 @@ export class ReservationService {
     return this.http.post(this.apiUrl, body, { headers });
   }
 }
+>>>>>>> 38b00fbe3e4985da7b8baecf73e3d4cdfa56b57a
