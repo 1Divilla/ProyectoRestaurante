@@ -25,8 +25,10 @@ urlpatterns = [
     path('', include('menu.urls')),  # Incluir URLs de la app
     path('', include('users.urls')),
     path('', include('order.urls')),
+    path('', include('orders_details.urls')),
     # path('auth/', include('rest_framework.urls')),
     path('api/usuarios/', include('users.urls')),
     # path('auth/', include('rest_framework.urls')),
     path('', include('order.urls')),
+    path('api/', include('reservations.urls')),  # API disponible en /api/reservations/
     ]

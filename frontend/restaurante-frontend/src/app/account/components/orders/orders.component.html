@@ -15,8 +15,8 @@
         <h4>Detalles del Pedido #{{ order.id }}</h4>
         <ul>
           <li *ngFor="let detail of orderDetails">
-            {{ detail.plato }} - Cantidad: {{ detail.cantidad }} - 
-            Precio: ${{ detail.precio_unitario }} - Total: ${{ detail.total }}
+            {{ detail.plato_nombre }} - Cantidad: {{ detail.cantidad }} - 
+            Precio: ${{ detail.precio_unitario }}
           </li>
         </ul>
       </div>

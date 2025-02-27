@@ -16,7 +16,13 @@ export class LoginComponent {
   onLogin(data: { email: string, password: string }) {
     this.authService.login(data).subscribe(
       response => {
-        this.authService.saveUserData(response);
+        this.authService.saveUserData(response); // Método original de guardado
+
+        // Guardar manualmente usuario y token en localStorage
+        localStorage.setItem('token', response.token); // Guardar token
+        localStorage.setItem('user', JSON.stringify(response.user)); // Guardar usuario
+
+        console.log('Usuario guardado en localStorage:', response.user); // Depuración
         this.router.navigate(['/dashboard']); // Redirigir tras login exitoso
       },
       error => {
