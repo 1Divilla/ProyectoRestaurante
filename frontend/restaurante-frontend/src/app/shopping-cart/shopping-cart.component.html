@@ -20,10 +20,12 @@
       </li>
     </ul>
     <div class="sidebar-total">
-      <span>Total: {{ getTotal() | currency:'EUR' }}</span>
+      <button mat-button color="accent" (click)="openAddressDialog()">
+        Pagar: {{ getTotal() | currency:'EUR' }}
+      </button>
     </div>
   </mat-sidenav>
-
+  
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     #NUESTRAS APPS
     'menu',  # Ruben 
     'users', # Marcell 
-    'order'  
+    'order',
+    'orders_details'
 ]
 # REST FRAMEWORK 
 REST_FRAMEWORK = {
@@ -74,6 +75,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",  # Angular
     "http://127.0.0.1:4200"
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True  # Solo para pruebas, no en producción
+
 
 ROOT_URLCONF = 'backend.urls'
 
