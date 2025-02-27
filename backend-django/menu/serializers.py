@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Plato, Categoria
 
 class PlatoSerializer(serializers.ModelSerializer):
-    categoría = serializers.PrimaryKeyRelatedField(queryset=Categoria.objects.all())
+    categoria = serializers.PrimaryKeyRelatedField(queryset=Categoria.objects.all())
 
     class Meta:
         model = Plato

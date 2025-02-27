@@ -24,7 +24,7 @@ class Plato(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     precio = models.DecimalField(max_digits=6, decimal_places=2)
     disponibilidad = models.BooleanField(default=True)
-    categoría = models.ForeignKey(Categoria, related_name='platos', on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categoria, related_name='platos', on_delete=models.CASCADE)
     alergenos = models.JSONField(default=list)
     cantidad = models.IntegerField(default=0)
     imagen = models.URLField(blank=True, null=True)

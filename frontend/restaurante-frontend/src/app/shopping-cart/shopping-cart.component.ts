@@ -28,11 +28,7 @@ export class ShoppingCartComponent {
     public cartService: CartService,
     public dialog: MatDialog,
     private http: HttpClient
-<<<<<<< HEAD
   ) { }
-=======
-  ) {}
->>>>>>> 872a4b224bc9ec4a0c8eb7e9aa0973bef1e07a4e
 
   ngOnInit() {
     this.cartService.cartItems$.subscribe(items => {
@@ -99,10 +95,7 @@ export class ShoppingCartComponent {
       cliente: user.id
     };
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 872a4b224bc9ec4a0c8eb7e9aa0973bef1e07a4e
     // Enviar el pedido a la API REST
     this.http.post(`${this.apiUrl}/pedidos/`, pedido).subscribe(
       (pedidoResponse: any) => {
@@ -111,7 +104,6 @@ export class ShoppingCartComponent {
         // Enviar cada producto como un detalle del pedido con el nombre en lugar del ID
         this.cartItems.forEach(item => {
           const detalle = {
-<<<<<<< HEAD
             order: pedidoResponse.id,
             plato: item.id,
             cantidad: item.cantidad,
@@ -126,14 +118,6 @@ export class ShoppingCartComponent {
 
 
 
-=======
-            order: pedidoResponse.id,  // ✅ Asociado al pedido recién creado
-            plato_nombre: item.nombre,  // ✅ Guardamos el nombre en lugar del ID
-            cantidad: item.cantidad,
-            precio_unitario: item.precio
-          };
-
->>>>>>> 872a4b224bc9ec4a0c8eb7e9aa0973bef1e07a4e
           this.http.post(`${this.apiUrl2}/order-details/`, detalle).subscribe(
             detalleResponse => console.log('✅ Detalle guardado:', detalleResponse),
             error => console.error('❌ Error al guardar detalle:', error)
@@ -145,7 +129,6 @@ export class ShoppingCartComponent {
       },
       error => console.error('❌ Error al crear pedido:', error)
     );
-<<<<<<< HEAD
   }
 
 
@@ -234,31 +217,6 @@ export class ShoppingCartComponent {
       background: #b3b3b3;
     }
   `]
-})
-export class AddressDialogComponent {
-  address: string = '';
-
-  constructor(public dialogRef: MatDialogRef<AddressDialogComponent>) {}
-
-  confirm(): void {
-    this.dialogRef.close(this.address);
-  }
-=======
->>>>>>> 872a4b224bc9ec4a0c8eb7e9aa0973bef1e07a4e
-}
-
-
-}
-
-@Component({
-  selector: 'app-address-dialog',
-  imports: [FormsModule],
-  template: `
-    <h2>Introduce tu dirección</h2>
-    <input [(ngModel)]="address" placeholder="Dirección" class="input"/>
-    <button mat-button (click)="confirm()">Confirmar</button>
-  `,
-  styles: ['.input { width: 100%; margin-bottom: 10px; padding: 8px; }']
 })
 export class AddressDialogComponent {
   address: string = '';

@@ -36,6 +36,6 @@ export class MenuService {
   }
 
   getPlatosPorCategoria(categoriaId: number): Observable<MenuItem[]> {
-    return this.http.get<MenuItem[]>(`${this.API_URL}platos/categoría/${categoriaId}/`);
+    return this.http.get<MenuItem[]>(`${this.API_URL}platos/categoria/${categoriaId}/`);
   }  
 }

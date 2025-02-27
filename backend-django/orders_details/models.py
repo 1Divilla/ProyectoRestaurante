@@ -2,13 +2,10 @@ from django.db import models
 from order.models import Pedido
 
 class OrderDetails(models.Model):
-<<<<<<< HEAD
     order = models.ForeignKey(Pedido, related_name='order_details', on_delete=models.CASCADE)
     plato = models.ForeignKey('menu.Plato', on_delete=models.CASCADE)  # ✅ Guardar el ID del plato
-=======
     order = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name="order_details")
     plato_nombre = models.CharField(max_length=255)  # ✅ Guardamos el nombre en lugar del ID
->>>>>>> 872a4b224bc9ec4a0c8eb7e9aa0973bef1e07a4e
     cantidad = models.PositiveIntegerField()
     precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
     total = models.DecimalField(max_digits=10, decimal_places=2)

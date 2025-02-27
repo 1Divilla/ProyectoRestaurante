@@ -6,34 +6,40 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from menu.models import Plato  # Importar el modelo de Plato
+from menu.models import Plato  # Importar modelo Plato
 
 class OrderDetailsPublicCreateAPIView(APIView):
-<<<<<<< HEAD
-    permission_classes = [AllowAny]
+    permission_classes = [AllowAny]  
 
     def post(self, request, *args, **kwargs):
-        print("📌 Datos recibidos en Django:", request.data)  # 🔥 Ver qué está llegando desde el frontend
-        
-=======
-    permission_classes = [AllowAny]  # ✅ Permitir acceso sin autenticación
+        print("📌 Datos recibidos en Django:", request.data)
 
-    def post(self, request, *args, **kwargs):
-        """
-        Crea un nuevo detalle de pedido sin necesidad de autenticación.
-        """
->>>>>>> 872a4b224bc9ec4a0c8eb7e9aa0973bef1e07a4e
-        serializer = OrderDetailsSerializer(data=request.data)
+        # 🔍 Intentamos obtener el ID del plato
+        plato_id = request.data.get("plato")
+        if not plato_id:
+            return Response({"error": "El campo 'plato' es obligatorio."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            plato = Plato.objects.get(id=plato_id)
+        except Plato.DoesNotExist:
+            return Response({"error": "El plato con ID {} no existe.".format(plato_id)}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 🔥 Asegurar que `plato` está en los datos validados
+        data = request.data.copy()  # Copiamos request.data para modificarlo
+        data["plato"] = plato.id  
+
+        serializer = OrderDetailsSerializer(data=data)
         if serializer.is_valid():
+            print("✅ Datos validados en el serializer:", serializer.validated_data)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-<<<<<<< HEAD
         
-        print("❌ Errores en validación:", serializer.errors)  # 🔥 Ver los errores específicos
+        print("❌ Errores en validación:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-=======
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
->>>>>>> 872a4b224bc9ec4a0c8eb7e9aa0973bef1e07a4e
+
+
 class OrderDetailsPublicAPIView(APIView):
     permission_classes = [AllowAny]  # ✅ Permitir acceso sin autenticación
 
