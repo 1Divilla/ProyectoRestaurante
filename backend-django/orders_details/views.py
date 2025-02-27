@@ -8,19 +8,32 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 class OrderDetailsPublicCreateAPIView(APIView):
+<<<<<<< HEAD
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         print("📌 Datos recibidos en Django:", request.data)  # 🔥 Ver qué está llegando desde el frontend
         
+=======
+    permission_classes = [AllowAny]  # ✅ Permitir acceso sin autenticación
+
+    def post(self, request, *args, **kwargs):
+        """
+        Crea un nuevo detalle de pedido sin necesidad de autenticación.
+        """
+>>>>>>> 872a4b224bc9ec4a0c8eb7e9aa0973bef1e07a4e
         serializer = OrderDetailsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+<<<<<<< HEAD
         
         print("❌ Errores en validación:", serializer.errors)  # 🔥 Ver los errores específicos
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+=======
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+>>>>>>> 872a4b224bc9ec4a0c8eb7e9aa0973bef1e07a4e
 class OrderDetailsPublicAPIView(APIView):
     permission_classes = [AllowAny]  # ✅ Permitir acceso sin autenticación
 

@@ -38,14 +38,33 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+<<<<<<< HEAD
+    'django_extensions',
+    'corsheaders',
+    #NUESTRAS APPS
+    'menu',
+    'order',
+    'reservations'
+    
+=======
     'rest_framework.authtoken',  # 🔥 Habilita autenticación por tokens
     'corsheaders',
     #NUESTRAS APPS
     'menu',  # Ruben 
     'users', # Marcell 
+<<<<<<< HEAD
     'order',
     'orders_details',
     'reservations',
+=======
+<<<<<<< HEAD
+    'order',
+    'orders_details'
+=======
+    'order'  
+>>>>>>> 785028fe7c610d5980e0c4b1526366574cb85d57
+>>>>>>> 7bc28789b7260d00f2d081d9608cfa9015ed8f58
+>>>>>>> 872a4b224bc9ec4a0c8eb7e9aa0973bef1e07a4e
 ]
 # REST FRAMEWORK 
 REST_FRAMEWORK = {
