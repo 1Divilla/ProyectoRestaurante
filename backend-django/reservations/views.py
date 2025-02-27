@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Reservation
+from .serializers import ReservationSerializer
 
-# Create your views here.
+class ReservationViewSet(viewsets.ModelViewSet):
+    queryset = Reservation.objects.all().order_by('-fecha_hora')
+    serializer_class = ReservationSerializer

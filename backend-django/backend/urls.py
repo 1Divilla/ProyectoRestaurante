@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('menu.urls')),  # Incluir URLs de la app
     path('order/', include('order.urls')),
+    path('api/', include('reservations.urls')),  # API disponible en /api/reservations/
 ]
