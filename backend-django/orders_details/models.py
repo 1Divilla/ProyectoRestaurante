@@ -1,9 +1,9 @@
 from django.db import models
-from orders.models import Order  
+from order.models import Pedido  
 from menu.models import Plato  
 
 class OrderDetails(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="order_details")  # Nombre único
+    order = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name="order_details")  # Nombre único
     plato = models.ForeignKey(Plato, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField()  # No permite valores negativos
     precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)

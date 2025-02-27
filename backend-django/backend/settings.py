@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+<<<<<<< HEAD
     'django_extensions',
     'corsheaders',
     #NUESTRAS APPS
@@ -45,7 +46,28 @@ INSTALLED_APPS = [
     'order',
     'reservations'
     
+=======
+    'rest_framework.authtoken',  # 🔥 Habilita autenticación por tokens
+    'corsheaders',
+    #NUESTRAS APPS
+    'menu',  # Ruben 
+    'users', # Marcell 
+    'order'  
+>>>>>>> 785028fe7c610d5980e0c4b1526366574cb85d57
 ]
+# REST FRAMEWORK 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # 🔥 Asegurar autenticación con tokens
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
+# Modelo personalizado de usuario
+AUTH_USER_MODEL = 'users.CustomUser'
+# Redirigir al usuario después de iniciar sesión exitoso
+LOGIN_REDIRECT_URL = '/api/usuarios/'  # O cualquier ruta válida de tu app
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,6 +82,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",  # Angular
+    "http://127.0.0.1:4200"
 ]
 
 ROOT_URLCONF = 'backend.urls'

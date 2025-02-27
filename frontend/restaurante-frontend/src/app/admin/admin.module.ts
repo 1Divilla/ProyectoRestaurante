@@ -7,7 +7,7 @@ import { ReservationsComponent } from './pages/reservations/reservations.compone
 import { TableSelectorComponent } from './components/table-selector/table-selector.component';
 import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
 import { RouterModule } from '@angular/router';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
     RouterModule,
@@ -17,7 +17,8 @@ import { RouterModule } from '@angular/router';
     OrdersComponent,      
     ReservationsComponent, 
     TableSelectorComponent, 
-    ReservationFormComponent 
+    ReservationFormComponent,
+    HttpClientModule
   ]
 })
 export class AdminModule { }
