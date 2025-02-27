@@ -28,11 +28,8 @@ export class ShoppingCartComponent {
     public cartService: CartService,
     public dialog: MatDialog,
     private http: HttpClient
-<<<<<<< HEAD
   ) { }
-=======
-  ) {}
->>>>>>> 4e1ca33e9a1f00c5bffd93e2f41d1cc5ab0c3d32
+  
 
   ngOnInit() {
     this.cartService.cartItems$.subscribe(items => {
@@ -90,7 +87,7 @@ export class ShoppingCartComponent {
       alert('Debes iniciar sesión para realizar un pedido');
       return;
     }
-
+  
     const pedido = {
       fecha_hora: new Date().toISOString(),
       total: this.getTotal(),
@@ -98,45 +95,42 @@ export class ShoppingCartComponent {
       direccion_envio: address,
       cliente: user.id
     };
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 4e1ca33e9a1f00c5bffd93e2f41d1cc5ab0c3d32
+  
     // Enviar el pedido a la API REST
     this.http.post(`${this.apiUrl}/pedidos/`, pedido).subscribe(
       (pedidoResponse: any) => {
         console.log('✅ Pedido creado:', pedidoResponse);
-
+  
         // Enviar cada producto como un detalle del pedido
         this.cartItems.forEach(item => {
+          if (!item.id) {
+            console.error('❌ Error: El item no tiene un ID válido:', item);
+            return;
+          }
+  
           const detalle = {
             order: pedidoResponse.id,
-            plato_nombre: item.nombre,  // ✅ Guardamos el nombre en lugar del ID
+            plato: item.id,  // ✅ Ahora enviamos el ID del plato, NO el nombre
             cantidad: item.cantidad,
             precio_unitario: item.precio,
-            total: item.cantidad * item.precio  // ✅ Enviar total calculado
+            total: item.cantidad * item.precio  // ✅ Total calculado
           };
-
-          console.log("📌 Enviando detalle:", JSON.stringify(detalle, null, 2));
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 4e1ca33e9a1f00c5bffd93e2f41d1cc5ab0c3d32
+  
+          console.log("📌 Enviando detalle corregido:", JSON.stringify(detalle, null, 2));
+  
           this.http.post(`${this.apiUrl2}/order-details/`, detalle).subscribe(
             detalleResponse => console.log('✅ Detalle guardado:', detalleResponse),
             error => console.error('❌ Error al guardar detalle:', error)
           );
         });
-
+  
         alert('Pedido realizado con éxito');
-        this.cartService.clearCart();  // Vaciar carrito
+        this.cartService.clearCart();  // Vaciar carrito después de hacer el pedido
       },
       error => console.error('❌ Error al crear pedido:', error)
     );
   }
+  
 }
 
 // ✅ AddressDialogComponent corregido y sin duplicados

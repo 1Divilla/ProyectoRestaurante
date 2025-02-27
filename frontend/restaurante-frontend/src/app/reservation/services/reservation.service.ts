@@ -32,16 +32,18 @@ export class ReservationService {
     return this.http.post(this.apiUrl, body, { headers });
   }
 
-  // Obtener todas las reservas
   getReservas(): Observable<Reserva[]> {
-    return this.http.get<Reserva[]>(this.apiUrl);
+    return this.http.get<Reserva[]>('http://127.0.0.1:8000/public/public-reservas/');
   }
-
-  // Crear una nueva reserva
+  
+  
   crearReserva(reserva: Reserva): Observable<Reserva> {
-    return this.http.post<Reserva>(this.apiUrl, reserva);
+    const token = localStorage.getItem('token');  // ✅ Obtener token del usuario
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    
+    return this.http.post<Reserva>(this.apiUrl, reserva, { headers });
   }
-
+  
   // Actualizar el estado de una reserva
   actualizarReserva(id: number, data: Partial<Reserva>): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${id}`, data);

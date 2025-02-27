@@ -22,8 +22,15 @@ from users.serializers import CustomUserSerializer
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import logout
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
-
+class LogoutAPIView(APIView):
+    def post(self, request):
+        logout(request)
+        return Response({'message': 'Sesión cerrada'}, status=status.HTTP_200_OK)
 
 
 

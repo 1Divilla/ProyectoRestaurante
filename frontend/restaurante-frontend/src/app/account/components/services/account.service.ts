@@ -11,7 +11,6 @@ export class AccountService {
   private apiBaseUrl2 = 'http://localhost:8000/';
   private apiUrl = 'http://localhost:8000';
 
-
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   // Obtener usuario autenticado desde localStorage
@@ -41,11 +40,17 @@ export class AccountService {
   getUserOrders(userId: number): Observable<any[]> {
     const headers = this.getAuthHeaders();
     return this.http.get<any[]>(`${this.apiBaseUrl2}/public/pedidos/${userId}/`);
-}
-
+  }
 
   // Obtener detalles de un pedido específico
   getOrderDetails(orderId: number) {
     return this.http.get(`${this.apiUrl}/public/order-details/${orderId}/`);
-  }  
+  }
+
+  // 🔥🔥 Método de logout 🔥🔥
+  logout(): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.post(`http://localhost:8000/api/usuarios/logout/`, {}, { headers });
+  }
+  
 }

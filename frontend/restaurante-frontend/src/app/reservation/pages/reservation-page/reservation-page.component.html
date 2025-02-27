@@ -17,34 +17,3 @@
       </div>
   </div>
 </div>
-
-<!-- Sección para Administrador: Lista de Reservas -->
-<div *ngIf="isAdmin" class="admin-reservations">
-  <h2>Lista de Reservas</h2>
-  <table>
-      <thead>
-          <tr>
-              <th>Nombre</th>
-              <th>Fecha</th>
-              <th>Hora</th>
-              <th>Personas</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let reserva of reservas">
-              <td>{{ reserva.nombreCliente }}</td>
-              <td>{{ reserva.fecha }}</td>
-              <td>{{ reserva.hora }}</td>
-              <td>{{ reserva.cantidadPersonas }}</td>
-              <td>{{ reserva.estado }}</td>
-              <td>
-                  <button *ngIf="reserva.estado !== 'Cancelada'" (click)="cancelarReserva(reserva.id)">
-                      ❌ Cancelar
-                  </button>
-              </td>
-          </tr>
-      </tbody>
-  </table>
-</div>

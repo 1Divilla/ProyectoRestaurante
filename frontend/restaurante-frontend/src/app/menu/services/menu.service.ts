@@ -58,17 +58,12 @@ export class MenuService {
 
   // 🔹 Obtener platos por categoría
   getPlatosPorCategoria(categoriaId: number): Observable<MenuItem[]> {
-<<<<<<< HEAD
-    return this.http.get<MenuItem[]>(`${this.API_URL}platos/categoria/${categoriaId}/`);
-  }  
-}
-=======
     return this.http.get<MenuItem[]>(`${this.apiUrl}platos/categoria/${categoriaId}/`);
-  }
+  }  
+  
 
   // 🔹 Obtener todas las categorías
   getCategorias(): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(`${this.apiUrl}categorias/`);
   }
 }
->>>>>>> 4e1ca33e9a1f00c5bffd93e2f41d1cc5ab0c3d32
