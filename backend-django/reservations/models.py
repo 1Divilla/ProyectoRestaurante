@@ -1,7 +1,6 @@
 from django.db import models
-<<<<<<< HEAD
 from django.contrib.auth.models import User
-
+from django.conf import settings
 class Reservation(models.Model):
     STATUS_CHOICES = [
         ('PENDING', 'Pendiente'),
@@ -9,7 +8,7 @@ class Reservation(models.Model):
         ('CANCELLED', 'Cancelada'),
     ]
 
-    cliente = models.ForeignKey(User, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     fecha_hora = models.DateTimeField()
     numero_personas = models.PositiveIntegerField()
     comentarios = models.TextField(blank=True, null=True)
@@ -17,7 +16,7 @@ class Reservation(models.Model):
 
     def __str__(self):
         return f"Reserva {self.id} - {self.cliente.username} ({self.fecha_hora})"
-=======
+
 from users.models import CustomUser
 
 class Reserva(models.Model):
@@ -33,4 +32,3 @@ class Reserva(models.Model):
 
     def __str__(self):
         return f"Reserva de {self.cliente.nombre} el {self.fecha_hora}"
->>>>>>> 785028fe7c610d5980e0c4b1526366574cb85d57

@@ -1,19 +1,50 @@
 <div class="reservation-page-container">
-    <!-- Selector de Mesas a la Izquierda -->
-    <div class="left-section">
+  <!-- Selector de Mesas a la Izquierda -->
+  <div class="left-section">
       <app-table-selection (tableSelected)="onTableSelected($event)"></app-table-selection>
-    </div>
-  
-    <!-- Formulario a la Derecha -->
-    <div class="right-section">
+  </div>
+
+  <!-- Formulario a la Derecha -->
+  <div class="right-section">
       <app-reservation-form (formSubmit)="onFormSubmit($event)"></app-reservation-form>
-  
+
       <!-- Botón para confirmar la reserva -->
       <button class="confirm-btn" (click)="showSummary()">Finalizar Reserva</button>
-  
+
       <!-- Mensaje de error si falta información -->
       <div *ngIf="showError" class="error-msg">
-        Por favor, completa el formulario y selecciona una mesa.
+          Por favor, completa el formulario y selecciona una mesa.
       </div>
-    </div>
   </div>
+</div>
+
+<!-- Sección para Administrador: Lista de Reservas -->
+<div *ngIf="isAdmin" class="admin-reservations">
+  <h2>Lista de Reservas</h2>
+  <table>
+      <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Personas</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let reserva of reservas">
+              <td>{{ reserva.nombreCliente }}</td>
+              <td>{{ reserva.fecha }}</td>
+              <td>{{ reserva.hora }}</td>
+              <td>{{ reserva.cantidadPersonas }}</td>
+              <td>{{ reserva.estado }}</td>
+              <td>
+                  <button *ngIf="reserva.estado !== 'Cancelada'" (click)="cancelarReserva(reserva.id)">
+                      ❌ Cancelar
+                  </button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

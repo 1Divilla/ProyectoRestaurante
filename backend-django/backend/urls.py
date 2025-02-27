@@ -23,16 +23,10 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('menu.urls')),  # Incluir URLs de la app
-<<<<<<< HEAD
     path('order/', include('order.urls')),
     path('api/', include('reservations.urls')),  # API disponible en /api/reservations/
-]
-=======
     path('', include('users.urls')),
     path('', include('order.urls')),
     # path('auth/', include('rest_framework.urls')),
     path('api/usuarios/', include('users.urls')),
-    # path('auth/', include('rest_framework.urls')),
-    path('', include('order.urls')),
     ]
->>>>>>> 785028fe7c610d5980e0c4b1526366574cb85d57
